@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .TermsAndConditions {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    width: 90;
+    height: 40;
+    margin: 10px auto;
+  }
+  
+  .btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    cursor: pointer;
+  }

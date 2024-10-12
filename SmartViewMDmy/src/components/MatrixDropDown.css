@@ -1,0 +1,11 @@
+.svg-inline{
+    height:1em;
+}
+
+.svg-inline svg{
+    display:inline-block;
+    height:1em;
+    line-height:1em;
+    /* just for vertical alignment */
+    vertical-align:-0.2em;
+}

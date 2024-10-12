@@ -1,0 +1,27 @@
+.popup { 
+  font-size: 10px;
+  font-family: 'Titillium Web', sans-serif !important;
+  text-align: left;
+    overflow-y: scroll;
+    border: 1px solid #DDD;
+    white-space: pre-line;
+    position: fixed;  
+    width: 90%;  
+    height: 90%;  
+    top: 0;  
+    left: 0;  
+    right: 0;  
+    bottom: 0;  
+    margin: auto;  
+    background-color: #ffffff;  
+  }  
+  .popup\_inner {  
+    position: absolute;  
+    left: 25%;  
+    right: 25%;  
+    top: 25%;  
+    bottom: 25%;  
+    margin: auto;  
+    border-radius: 20px;  
+    background: white;  
+  }

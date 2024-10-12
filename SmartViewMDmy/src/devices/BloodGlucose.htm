@@ -1,0 +1,142 @@
+
+
+<!doctype html>
+<html>
+
+<head>
+    <title>Blood Pressure Monitor Bluetooth</title>
+
+</head>
+
+<body>
+
+    <div >
+
+        <main >
+            <p id="dateMod">date last mod? </p>
+            <script>
+                //var date = document.lastModified;
+                  fetch("blood-pressure-monitor.js")
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const file = new File([blob], blob.name);
+                        var date = file.lastModifiedDate
+                        document.getElementById("dateMod").innerHTML = date;
+                        console.log(file.lastModifiedDate, file.lastModified);
+                    })
+            </script>
+
+            <h3><i>SmartViewMD (Stage 5cd)</i></h3>
+            
+            <div class="power-button ">
+
+            <button id="pair" onclick="onBluetoothDeviceButtonClick(123,'bloodPressureMonitor', []  )" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--green">
+                <i class="material-icons">bluetooth</i> Pair True METRIX Air Glucose Device
+            </button>
+        </div>
+        
+            <div class="power-button ">
+                <button onclick="onBluetoothDeviceButtonClick(123,'bloodPressureMonitor', [167, 47, 79, 47]  )" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--green">
+                    <i class="material-icons">lightbulb_outline</i> Get Bloood Pressure Readings
+                </button>
+            </div>
+            <div class="power-button ">
+                <button onclick="unPairDevice()" class="connect-button mdl-button mdl-js-button mdl-button--raised mdl-button--green">
+                    <i class="material-icons">lightbulb_outline</i> UnPair BP Device
+                </button>
+            </div>
+
+        <hr>
+
+            <div id="pairingDiv">Pairing Info</div>
+
+        <hr>
+        <div id="blueToothReadingsDiv">ᛒluetooth</div>
+
+        </main>
+    </div>
+<script>
+   const onBluetoothDeviceButtonClick = (uid,deviceType,devicePW) => {
+
+        var glucoseMeasurementCharacteristic, racpCharacteristic;
+
+        navigator.bluetooth.requestDevice({filters: [{services: ['glucose']}]})
+        .then(device => device.gatt.connect())
+        .then(server => server.getPrimaryService('glucose'))
+        .then(service => {
+            return Promise.all([
+                service.getCharacteristic('glucose_measurement'),
+                service.getCharacteristic('glucose_measurement_context'),
+                service.getCharacteristic('record_access_control_point')
+            ])
+        })
+        .then(characteristics => {
+            [glucoseCharacteristic,glucoseContextCharacteristic,racpCharacteristic] = characteristics;
+
+            console.log('0. glucoseCharacteristic',glucoseCharacteristic)
+            console.log('1. glucoseContextCharacteristic',glucoseContextCharacteristic)
+            console.log('2. racpCharacteristic',racpCharacteristic)
+
+        })
+        .then(_ => {
+            console.log('3a. glucoseCharacteristic.startNotifications',_)
+
+            return glucoseCharacteristic.startNotifications()
+        })
+        .then(_ => {
+            console.log('3b. glucoseCharacteristic.addEventListener',_)
+            return glucoseCharacteristic.addEventListener('characteristicvaluechanged', handleGlucose)
+        })
+        .then(_ => {
+            console.log('4a. glucoseContextCharacteristic.startNotifications',_)
+
+            return glucoseContextCharacteristic.startNotifications()
+        })
+        .then(_ => {
+            console.log('4b. glucoseContextCharacteristic.addEventListener',_)
+            return glucoseContextCharacteristic.addEventListener('characteristicvaluechanged', handleGlucoseContext)
+        })
+        .then(_ => {
+            console.log('5. racpCharacteristic.startNotifications',_)
+            return racpCharacteristic.startNotifications()
+        })
+        .then(_ => {
+            console.log('6. racpCharacteristic.addEventListener',_)
+            return racpCharacteristic.addEventListener('characteristicvaluechanged', handleRacp)
+        })
+        .then(_ => {
+            console.log('7. racpCharacteristic.writeValue',_)
+            //return null
+            return racpCharacteristic.writeValue(new Uint8Array([1, 1]))
+        })
+        .catch(error => {
+            console.log('8. requestDevice ERROR',error);
+        });
+
+        function handleGlucose(event) {
+            console.log('10. handleGlucose',event.target.value);
+        }
+
+        function handleGlucoseContext(event) {
+            console.log('10. handleGlucoseContext',event.target.value);
+        }
+
+        function handleRacp(event) {
+            console.log('20. handleRacp',event.target.value);
+        }
+
+   }
+
+   function unPairDevice() {
+    //alert('unPairDevice() not implemented yet ...  not sure if needed, as developer can clear Local Storage and Application Site Data.')
+    localStorage.clear()
+    document.getElementById('pairingDiv').innerHTML = `Local storage Cleared ${new Date(Date.now()).toLocaleString()}`
+    alert('unPairDevice() cleared local storage for this web page')
+   }
+
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,241 @@
+/** Declare some variables **/
+$primary: #007bff;
+
+// Password strength meter color for the different levels
+$strength-colors: (darkred, orangered, orange, yellowgreen, green);
+
+// Gap width between strength meter bars
+$strength-gap: 6px;
+
+body {
+  font-size: 62.5%;
+}
+
+.main-container {
+  width: 400px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.form-container {
+  bottom: 100px;
+}
+
+legend.form-label {
+  font-size: 1.5rem;
+  color: desaturate(darken($primary, 10%), 60%);
+}
+
+.control-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: desaturate(darken($primary, 10%), 80%);
+}
+
+.form-control {
+  font-size: 1rem;
+}
+
+.form-hint {
+  font-size: 0.6rem;
+  line-height: 1.4;
+  margin: -5px auto 5px;
+  color: #999;
+
+  &.error {
+    color: #C00;
+    font-size: 0.8rem;
+  }
+}
+
+button.btn {
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.password-count {
+  bottom: 16px;
+  right: 10px;
+  font-size: 1rem;
+}
+
+.strength-meter {
+  position: relative;
+  height: 3px;
+  background: #DDD;
+  margin: 7px 0;
+  border-radius: 2px;
+
+  // Dynamically create the gap effect
+  &:before,
+  &:after {
+    content: '';
+    height: inherit;
+    background: transparent;
+    display: block;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 0 $strength-gap 0;
+    position: absolute;
+    width: calc(20% + #{$strength-gap});
+    z-index: 10;
+  }
+
+  // Dynamically create the gap effect
+  &:before {
+    left: calc(20% - #{($strength-gap / 2)});
+  }
+
+  // Dynamically create the gap effect
+  &:after {
+    right: calc(20% - #{($strength-gap / 2)});
+  }
+}
+
+.strength-meter-fill {
+  background: transparent;
+  height: inherit;
+  position: absolute;
+  width: 0;
+  border-radius: inherit;
+  transition: width 0.5s ease-in-out, background 0.25s;
+
+  // Dynamically generate strength meter color styles
+  @for $i from 1 through 5 {
+    &[data-strength='#{$i - 1}'] {
+      width: (20% * $i);
+      background: nth($strength-colors, $i);
+    }
+  }
+}
+/* Color/shape of burger icon bars = #374746*/
+// .navbar-dark .navbar-toggler-icon {
+//   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+// }
+.navbar-dark .navbar-toggler-icon  {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+// ORIGINAL
+// body {
+//     background-color: #f9f9f9 !important;
+//     font-size: 15px;
+//     font-family: 'Titillium Web', sans-serif !important;
+//   }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .ui.button,
+  .ui.input,
+  .ui.form input {
+    font-family: 'Titillium Web', sans-serif !important;
+  }
+  
+  header {
+    height: 50px;
+    background: #0099ff;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .center {
+    height: 50px;
+    position: fixed;
+    top: 1%;
+  }
+  .centeredDiv {
+    height: 10vh; /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .centeredDiv2 {
+    height: 0vh; /* Magic here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  header h2 {
+    color: #fff;
+    margin: 0;
+    padding: 0px;
+    position: absolute;
+  }
+  
+  .app {
+    margin-top: 100px;
+  }
+  .nav-link {
+    font-size: 1.1em;
+  }
+  .mr-auto{
+    line-height: 30px;
+    float: right;
+    align-items: right;
+  }
+  .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ui.card.login-card {
+    width: 450px;
+  }
+  
+  .ui.form input[type='text'],
+  .ui.form input[type='date'],
+  .ui.form input[type='time'],
+  .ui.form input[type='password'],
+  .ui.form select {
+    margin-top: 10px;
+  }
+  
+  .logout {
+    float: right;
+    position: relative;
+    top: 4px;
+    right: 15px;
+  }
+  
+  .actions {
+    text-align: right;
+  }
+  
+  .actions button {
+    margin-right: 5px;
+  }
+  
+  .actions a {
+    margin-left: 5px;
+  }
+  
+  /* profile image */
+  .profile-image {
+    padding: 20px;
+  }
+  
+  .profile-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .icon-image img {
+    width: 10px;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .upload-button {
+    float: right;
+    margin-top: 20px;
+  }

@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{path=**}/readings/{readingId} {
+      allow read : if request.auth.token.doctor == true ||  request.auth.token.admin == true 
+    }
+    match /users/{userId}/{other=**} {
+      allow read ; //: if request.auth != null && ( request.auth.uid == userId || request.auth.token.doctor == true ||  request.auth.token.admin == true ) ;
+      allow write, update : if request.auth != null && ( request.auth.uid == userId ) ; // if request.auth.uid == request.resource.data.author_uid 
+    }
+    match /users_override/{userId}/{other=**} {
+      allow read ;
+      allow write, update : if request.auth != null && ( request.auth.token.doctor == true ||  request.auth.token.admin == true ) ;
+    }
+    match /instance_tokens/{userId=**} {
+      allow read, write, update: if request.auth.uid != null;
+    }
+  }
+}

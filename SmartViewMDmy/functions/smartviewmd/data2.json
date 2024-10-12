@@ -1,0 +1,66 @@
+[
+  {
+    "created": 1607654199585,
+    "devices": {
+      "continuousGlucoseMonitor": {
+        "date": "",
+        "note": "",
+        "reading": { "Glucose": "76" },
+        "time": ""
+      }
+    },
+    "profile": { "doctor": "" }
+  },
+
+  {
+    "created": 1607644689618,
+    "devices": {
+      "bloodGlucoseMeter": {
+        "date": "",
+        "note": "",
+        "reading": { "Glucose": "77" },
+        "time": ""
+      },
+      "bloodPressureMonitor": {
+        "date": "",
+        "note": "",
+        "reading": { "Lower": "77", "Pulse": "77", "Upper": "77" },
+        "time": ""
+      },
+      "continuousGlucoseMonitor": {
+        "date": "",
+        "note": "",
+        "reading": { "Glucose": "77" },
+        "time": ""
+      },
+      "fingertipPulseOximeter": {
+        "date": "",
+        "note": "",
+        "reading": { "PI": "77", "PR": "77", "SpO2": "77" },
+        "time": ""
+      },
+      "peakFlowMeter": {
+        "date": "",
+        "note": "",
+        "reading": { "Peak Flow": "77" },
+        "time": ""
+      }
+    },
+    "profile": { "doctor": "Dr. Joycelyn Lawrence, MD" }
+  },
+  {
+    "continuousGlucoseMonitor": { "Glucose": "mg/DL" },
+    "bloodGlucoseMeter": { "Glucose": "mg/DL" },
+    "peakFlowMeter": { "Peak Flow": "I/min" },
+    "bloodPressureMonitor": {
+      "Upper": "mm Hg (Systolic)",
+      "Lower": "mm Hg (Diastolic)",
+      "Pulse": "bpm (Pulse Rate)"
+    },
+    "fingertipPulseOximeter": {
+      "SpO2": "% (Oxygen Saturation)",
+      "PR": "bpm (Pulse Rate)",
+      "PI": "% (Perfusion Index)"
+    }
+  }
+]
